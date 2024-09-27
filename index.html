@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <img class="main-screen" src="images/Main_screen2.png" alt="MainScreen" usemap="#mainmap" id="main-screen">
+
+    <map name="mainmap" id="image-map">
+    <area shape="circle" coords="678,375,15" alt="FortAmsterdam" id="fort-amsterdam" onclick="playVideo(this.id)">
+    <area shape="circle" coords="690,459,14" alt="Church" id="church" onclick="playVideo(this.id)">
+    <area shape="circle" coords="862,336,13" alt="Broadway" id="broadway" onclick="playVideo(this.id)">
+    <area shape="circle" coords="1348,207,17" alt="CompanyGarden" id="company-garden" onclick="playVideo(this.id)">
+    <area shape="circle" coords="1462,512,17" alt="TheWall" id="the-wall" onclick="playVideo(this.id)">
+    <area shape="circle" coords="1026,593,16" alt="Canal" id="canel" onclick="playVideo(this.id)">
+    <area shape="circle" coords="675,671,14" alt="KierstedeHouse" id="kierstede-house" onclick="playVideo(this.id)">
+    <area shape="circle" coords="1009,719,15" alt="HouseOfEnslavedWorkers" id="house-of-enslaved-workers" onclick="playVideo(this.id)">
+    <area shape="circle" coords="692,775,13" alt="Dock" id="dock" onclick="playVideo(this.id)">
+    <area shape="circle" coords="957,849,14" alt="CityHall" id="city-hall" onclick="playVideo(this.id)">
+    <area shape="rect" coords="29,1005,148,1055" alt="About" id="about" onclick="playVideo(this.id)">
+    </map>
+    
+    <video width="100%" autoplay id="fort-amsterdam-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Fort_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="church-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Church_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="broadway-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Broadway_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="company-garden-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Garden_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="the-wall-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Wall_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="canel-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Canal_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="kierstede-house-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Kierstede_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="house-of-enslaved-workers-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/HouseEnslaved_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="dock-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/Dock_Final_TypoFix.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="city-hall-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/CityHall_Final.mp4" type="video/mp4">
+    </video>
+    <video width="100%" autoplay id="about-video" style="display: none;" onended=closeVideo(this.id)>
+        <source src="videos/AboutFinalFinal.mp4" type="video/mp4">
+    </video>
+    
+</body>
+<script>
+    function playVideo(clicked_id) {
+        let video_id = clicked_id.concat('-video');
+        const element = document.getElementById(video_id);
+    
+        const main_element = document.getElementById("main-screen");
+        main_element.style.display = "none";
+
+        element.style.display = "block";
+        element.currentTime = 0;
+        element.play();
+        //openFullscreen(element);
+    }
+
+    function closeVideo(video_id) {
+        const element = document.getElementById(video_id);
+        element.style.display = "none";
+        const main_element = document.getElementById("main-screen");
+        main_element.style.display = "block";
+    }
+
+    function openFullscreen(elem) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
+
+    var mainElement = document.documentElement;
+    function openFull() {
+        if (mainElement.requestFullscreen) {
+            mainElement.requestFullscreen();
+        } else if (mainElement.webkitRequestFullscreen) { /* Safari */
+            mainElement.webkitRequestFullscreen();
+        } else if (mainElement.msRequestFullscreen) { /* IE11 */
+            mainElement.msRequestFullscreen();
+        }
+    }
+
+    function closeFull() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+        }
+    }
+
+    const originalWidth = 1920;
+    const originalHeight = 1080;
+
+    const image = document.getElementById('main-screen');
+    const map = document.getElementById('image-map');
+    const areas = map.getElementsByTagName('area');
+
+    function resizeImageMap() {
+        const imageWidth = image.clientWidth;
+        const imageHeight = image.clientHeight;
+
+        const widthScale = imageWidth / originalWidth;
+        const heightScale = imageHeight / originalHeight;
+
+        for (let i = 0; i < areas.length; i++) {
+            const coords = areas[i].getAttribute('coords').split(',').map(Number);
+            const newCoords = coords.map((coord, index) => 
+                index % 2 === 0 ? coord * widthScale : coord * heightScale
+            );
+            areas[i].setAttribute('coords', newCoords.join(','));
+        }
+    }
+
+    // Call resize function on load and resize
+    window.onload = resizeImageMap;
+    window.onresize = resizeImageMap;
+    </script>
+</html>
