@@ -10,6 +10,20 @@
 
     <img class="main-screen" width="100%" src="images/Main_screen2.png" alt="MainScreen" usemap="#mainmap" id="main-screen">
 
+    <!-- Glowing Markers -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-fort-amsterdam"></div> <!-- Marker for Fort Amsterdam -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-church"></div> <!-- Marker for Church -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-broadway"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-company-garden"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-the-wall"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-canal"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-kierstede-house"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-house-of-enslaved-workers"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-dock"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-city-hall"></div> <!-- Marker for Broadway -->
+    <div class="marker" style="top: 365px; left: 668px;" id="marker-about"></div> <!-- Marker for Broadway -->
+
+
     <map name="mainmap" id="image-map">
     <area shape="circle" coords="678,375,15" alt="FortAmsterdam" id="fort-amsterdam" onclick="playVideo(this.id)">
     <area shape="circle" coords="690,459,14" alt="Church" id="church" onclick="playVideo(this.id)">
@@ -25,37 +39,37 @@
     </map>
     
     <video width="100%" autoplay id="fort-amsterdam-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Fort_Final.mp4" type="video/mp4">
+        <source src="vids/Fort_Final.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="church-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Church_Final.mp4" type="video/mp4">
+        <source src="vids/Church.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="broadway-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Broadway_Final.mp4" type="video/mp4">
+        <source src="vids/Broadway.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="company-garden-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Garden_Final.mp4" type="video/mp4">
+        <source src="vids/Garden.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="the-wall-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Wall_Final.mp4" type="video/mp4">
+        <source src="vids/Wall_Final.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="canel-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Canal_Final.mp4" type="video/mp4">
+        <source src="vids/Canel.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="kierstede-house-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Kierstede_Final.mp4" type="video/mp4">
+        <source src="vids/Kierstede.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="house-of-enslaved-workers-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/HouseEnslaved_Final.mp4" type="video/mp4">
+        <source src="vids/HouseEnslaved_Final.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="dock-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/Dock_Final_TypoFix.mp4" type="video/mp4">
+        <source src="vids/Dock.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="city-hall-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/CityHall_Final.mp4" type="video/mp4">
+        <source src="vids/CityHall.webm" type="video/webm">
     </video>
     <video width="100%" autoplay id="about-video" style="display: none;" onended=closeVideo(this.id)>
-        <source src="videos/AboutFinalFinal.mp4" type="video/mp4">
+        <source src="vids/AboutFinalFinal.webm" type="video/webm">
     </video>
     
 </body>
@@ -134,8 +148,45 @@
         }
     }
 
-    // Call resize function on load and resize
-    window.onload = resizeImageMap;
-    window.onresize = resizeImageMap;
+    const markers = [
+        { id: 'marker-fort-amsterdam', top: 365, left: 668 },     // Fort Amsterdam
+        { id: 'marker-church', top: 449, left: 680 },             // Church
+        { id: 'marker-broadway', top: 326, left: 852 },           // Broadway
+        { id: 'marker-company-garden', top: 197, left: 1338 },    // Company Garden
+        { id: 'marker-the-wall', top: 502, left: 1452 },          // The Wall
+        { id: 'marker-canal', top: 583, left: 1016 },             // Canal
+        { id: 'marker-kierstede-house', top: 661, left: 665 },    // Kierstede House
+        { id: 'marker-house-of-enslaved-workers', top: 709, left: 999 }, // House of Enslaved Workers
+        { id: 'marker-dock', top: 765, left: 682 },               // Dock
+        { id: 'marker-city-hall', top: 839, left: 947 },          // City Hall
+        { id: 'marker-about', top: 995, left: 88 }                // About
+    ];
+
+    function resizeMarkers() {
+        const image = document.getElementById('main-screen');
+        const imageWidth = image.clientWidth;
+        const imageHeight = image.clientHeight;
+
+        // Scale factors
+        const widthScale = imageWidth / originalWidth;
+        const heightScale = imageHeight / originalHeight;
+
+
+        // Resize each marker based on scale
+        markers.forEach(marker => {
+            const markerElement = document.getElementById(marker.id);
+            markerElement.style.top = `${marker.top * widthScale}px`;
+            markerElement.style.left = `${marker.left * heightScale}px`;
+        });
+    }
+
+    function initialize() {
+        resizeMarkers();
+        resizeImageMap();
+    }
+
+    // Call the initialize function on window load and resize
+    window.onload = initialize;
+    window.onresize = initialize;
     </script>
 </html>

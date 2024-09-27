@@ -13,3 +13,27 @@ video {
     max-width: 100vw;
     max-height: 100vh;
 }
+
+.marker {
+    position: absolute;
+    width: 30px; /* Set marker size */
+    height: 30px;
+    border-radius: 50%;
+    background-color: red;
+    box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    animation: pulse 1.5s infinite;
+    pointer-events: none; /* Prevent blocking image map clicks */
+}
+
+/* Pulse animation for glowing effect */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    }
+    50% {
+        box-shadow: 0 0 20px red, 0 0 30px red, 0 0 40px red;
+    }
+    100% {
+        box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
+    }
+}
