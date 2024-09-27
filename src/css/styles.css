@@ -7,25 +7,60 @@
 
 body {
     background-color: transparent;
+    overflow: hidden;
+    margin-top:0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
 }
+
+.watermark {
+    position: absolute; /* Use absolute positioning to overlay the watermark */
+    top: 50%; /* Center the watermark vertically */
+    left: 50%; /* Center the watermark horizontally */
+    transform: translate(-50%, -50%); /* Adjust positioning */
+    font-size: 48px; /* Adjust the font size as needed */
+    color: rgba(255, 255, 255, 0.7); /* Set text color and transparency */
+    pointer-events: none; /* Allow clicks to pass through the watermark */
+    user-select: none; /* Prevent selection of the watermark text */
+    white-space: nowrap; /* Prevent text from wrapping */
+    z-index: 1000; /* Ensure it appears above other content */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Add shadow for better visibility */
+}
+
 
 video {
     max-width: 100vw;
     max-height: 100vh;
 }
 
+
 .marker {
     position: absolute;
-    width: 30px; /* Set marker size */
+    width: 30px; /* Outer red marker size */
     height: 30px;
     border-radius: 50%;
     background-color: red;
     box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
     animation: pulse 1.5s infinite;
-    pointer-events: none; /* Prevent blocking image map clicks */
+    pointer-events: none; /* Prevents interaction blocking */
+    display: flex; /* Center the inner white dot */
+    justify-content: center;
+    align-items: center;
 }
 
-/* Pulse animation for glowing effect */
+.marker-inner {
+    width: 10px; /* White dot size */
+    height: 10px;
+    border-radius: 50%;
+    background-color: white;
+    position: absolute; /* Absolutely position the white dot */
+    top: 50%; /* Center the white dot vertically */
+    left: 50%; /* Center the white dot horizontally */
+    transform: translate(-50%, -50%); /* Adjust for dot's size to ensure perfect centering */
+}
+
+/* Animation for the pulsating effect */
 @keyframes pulse {
     0% {
         box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
@@ -37,3 +72,17 @@ video {
         box-shadow: 0 0 10px red, 0 0 20px red, 0 0 30px red;
     }
 }
+
+/* Scale animation for pulsating dot effect */
+@keyframes scale-up {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
